@@ -1,5 +1,7 @@
 from wos_scraper import html_parser
 from wos_scraper import setup_page
+from wos_scraper import parse_soup
+
 from bs4 import BeautifulSoup
 
 
@@ -13,3 +15,5 @@ file = 'test-pagesource.html'
 htmlfile = open(file, 'r', encoding='utf-8').read()
 # soup = BeautifulSoup(html, 'html.parser')
 soup = BeautifulSoup(htmlfile, 'html.parser')
+df = parse_soup.get_df(soup)
+df.to_csv('df-trial.csv')

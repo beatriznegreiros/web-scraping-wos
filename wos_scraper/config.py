@@ -8,3 +8,4 @@ from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.common.exceptions import TimeoutException, ElementClickInterceptedException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+import pandas as pd
