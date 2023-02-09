@@ -1,13 +1,4 @@
-from bs4 import BeautifulSoup
-import time
-import random
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support.ui import WebDriverWait as wait
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
+from .config import *
 
 
 def setup_wos_driver(link):
@@ -22,6 +13,7 @@ def setup_wos_driver(link):
 
     # Find consent cookies by button ID
     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'onetrust-accept-btn-handler')))
+    time.sleep(2)
     consent_button = driver.find_element(By.ID, value='onetrust-accept-btn-handler')
     consent_button.click()  # click on accept cookies
 
@@ -38,44 +30,50 @@ def setup_wos_driver(link):
 
 # Find all "Show more" buttons to open full-text abstracts
 def scroll_and_click_showmore(indexes_to_loop, driver):
+    # Init list with items that couldnt be opened due to sophisticated web blocking
     is_not_clicked = []
+
+    # Loop through all papers in the current page (50 in total)
     for i in indexes_to_loop:
-        click_success = False
+        # Find Div element containing the paper records
         paper_div = driver.find_element(By.XPATH,
                                         '/html/body/app-wos/main/div/div/div[2]/div/'
                                         'div/div[2]/app-input-route/app-base-summary-component/'
                                         'div/div[2]/app-records-list/app-record[{}]/div/div/div[2]/'
                                         'div[1]'.format(i))
+        # Defining the XPATH for the button of the iterating paper
         element = '/html/body/app-wos/main/div/div/div[2]/div/div/div[2]/' \
                   'app-input-route/app-base-summary-component/div/div[2]/' \
                   'app-records-list/app-record[{}]/div/div/div[2]/div[1]/' \
                   'div[2]/div/span[2]/button'.format(i)
+        print('/html/body/app-wos/main/div/div/div[2]/div/'
+                                        'div/div[2]/app-input-route/app-base-summary-component/'
+                                        'div/div[2]/app-records-list/app-record[{}]/div/div/div[2]/'
+                                        'div[1]'.format(i))
         try:
             driver.execute_script("arguments[0].scrollIntoView(true);", paper_div)
             btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, element)))
-            btn.click()
+
+            # Try to click
+            try:
+                btn.click()
+
+            # If this exception is raised, it means a pop-up opened that we need to get rid off
+            except ElementClickInterceptedException:
+                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'pendo-button-f8b7283d')))
+                remind_button = driver.find_element(By.ID, value='pendo-button-f8b7283d')
+                remind_button.click()
             time.sleep(random.randint(1, 10))
+
+        # If timeout, then save the items that needed to be jumped and continue with the next paper
         except TimeoutException:
-            print('Could not fetch item {} . I will scroll up before moving forward with the next items.'.format(i))
+            print('Could not fetch item {} . I will scroll up before moving '
+                  'forward with the next items.'.format(i))
             is_not_clicked.append(i)
+            # Scroll to the top of the page to reset the automated scroll-down
             driver.find_element(By.TAG_NAME, 'body').send_keys(Keys.UP)
             driver.execute_script("window.scrollBy(0,250);")
+
+            # Sleep for 2 sec to make sure resetting took place
             time.sleep(2)
-    return is_not_clicked
-
-
-search = 'https://www.webofscience.com/wos/woscc/summary/ff7d7f65-1ac6-4213-b788-f3caf673d7fd-6c336e02/relevance/1'
-page_driver = setup_wos_driver(link=search)
-is_still_missing = scroll_and_click_showmore(indexes_to_loop=range(1, 51), driver=page_driver)
-while len(is_still_missing) > 0:
-    page_driver = setup_wos_driver(link=search)
-    is_still_missing = scroll_and_click_showmore(indexes_to_loop=is_still_missing, driver=page_driver)
-
-
-#
-# html = driver.page_source
-#
-# soup = BeautifulSoup(html)
-#
-# for tag in soup.find_all('title'):
-#     print(tag.text)
+    return is_not_clicked, driver
