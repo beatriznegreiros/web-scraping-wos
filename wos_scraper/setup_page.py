@@ -77,3 +77,21 @@ def scroll_and_click_showmore(indexes_to_loop, driver):
             # Sleep for 2 sec to make sure resetting took place
             time.sleep(2)
     return is_not_clicked, driver
+
+
+def get_html_through_paginations(search, pags):
+    list_html_per_pagination = []
+    for i in pags:
+        link_of_pagination = search[0:-1]+str(i)
+        page_driver = setup_wos_driver(link=link_of_pagination)
+        is_still_missing, driver = scroll_and_click_showmore(indexes_to_loop=range(1, 3), driver=page_driver)
+        list_html_per_pagination.append(driver.page_source)
+    return list_html_per_pagination
+
+
+def save_htmls(list_of_htmls):
+    i = 1
+    for h in list_of_htmls:
+        with open('html_source_page_{}.txt'.format(i), 'w') as f:
+            f.write(h)
+        i +=1
