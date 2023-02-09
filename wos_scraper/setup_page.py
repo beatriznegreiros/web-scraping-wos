@@ -92,6 +92,7 @@ def get_html_through_paginations(search, pags):
 def save_htmls(list_of_htmls):
     i = 1
     for h in list_of_htmls:
-        with open('html_source_page_{}.txt'.format(i), 'w') as f:
+        with open('html_source_page_{}.html'.format(i), 'w', encoding='utf-8') as f:
             f.write(h)
-        i +=1
+        time.sleep(30)
+        i += 1
