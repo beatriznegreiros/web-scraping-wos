@@ -9,7 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 # Open a firefox windoe
 driver = webdriver.Firefox()
-driver.maximize_window()
+# driver.maximize_window()
 
 # Send GET request for the given http protocol (link)
 driver.get('https://www.webofscience.com/wos/woscc/summary/ff7d7f65-1ac6-4213-b788-f3caf673d7fd-6c336e02/relevance/1')
@@ -32,13 +32,31 @@ except TimeoutException:
 
 # Find all "Show more" buttons to open full-text abstracts
 element = 'show-more.show-more-text'
-btns = driver.find_elements(By.CSS_SELECTOR, element)
+# paper_div = driver.find_element(By.XPATH, '/html/body/app-wos/main/div/div/div[2]/div/div/div[2]/app-input-route/app-base-summary-component/div/div[2]/app-records-list/app-record[1]/div/div/div[2]/div[1]')
+# aper_div2 = driver.find_element(By.XPATH, '/html/body/app-wos/main/div/div/div[2]/div/div/div[2]/app-input-route/app-base-summary-component/div/div[2]/app-records-list/app-record[2]/div/div/div[2]/div[1]')
 
-# Click on all buttons
-for btn in btns:
+for i in range(1, 51):
+    paper_div = driver.find_element(By.XPATH,
+                                    '/html/body/app-wos/main/div/div/div[2]/div/'
+                                    'div/div[2]/app-input-route/app-base-summary-component/'
+                                    'div/div[2]/app-records-list/app-record[{}]/div/div/div[2]/'
+                                    'div[1]'.format(i))
+    driver.execute_script("arguments[0].scrollIntoView(true);", paper_div)
+    element = '/html/body/app-wos/main/div/div/div[2]/div/div/div[2]/' \
+              'app-input-route/app-base-summary-component/div/div[2]/' \
+              'app-records-list/app-record[{}]/div/div/div[2]/div[1]/' \
+              'div[2]/div/span[2]/button'.format(i)
+    btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, element)))
     btn.click()
-    print(btn)
-    time.sleep(3)
+
+
+
+# time.sleep(4)
+# # Click on all buttons
+# for btn in btns:
+#     btn.click()
+#     print(btn)
+#     time.sleep(3)
 
 #
 # html = driver.page_source
