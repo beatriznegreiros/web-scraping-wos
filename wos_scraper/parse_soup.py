@@ -9,7 +9,8 @@ def get_text_or_NA(item):
     return result
 
 
-def get_df(soup):
+def parse_html_get_table(htmlfile):
+    soup = BeautifulSoup(htmlfile, 'html.parser')
     papers = soup.find_all('div', {'class': 'data-section'})
     abs_list = []
     title_list = []

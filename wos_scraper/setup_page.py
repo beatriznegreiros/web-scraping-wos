@@ -46,10 +46,7 @@ def scroll_and_click_showmore(indexes_to_loop, driver):
                   'app-input-route/app-base-summary-component/div/div[2]/' \
                   'app-records-list/app-record[{}]/div/div/div[2]/div[1]/' \
                   'div[2]/div/span[2]/button'.format(i)
-        print('/html/body/app-wos/main/div/div/div[2]/div/'
-                                        'div/div[2]/app-input-route/app-base-summary-component/'
-                                        'div/div[2]/app-records-list/app-record[{}]/div/div/div[2]/'
-                                        'div[1]'.format(i))
+
         try:
             driver.execute_script("arguments[0].scrollIntoView(true);", paper_div)
             btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, element)))
@@ -60,9 +57,13 @@ def scroll_and_click_showmore(indexes_to_loop, driver):
 
             # If this exception is raised, it means a pop-up opened that we need to get rid off
             except ElementClickInterceptedException:
-                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.ID, 'pendo-button-f8b7283d')))
+                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'pendo-button-f8b7283d')))
                 remind_button = driver.find_element(By.ID, value='pendo-button-f8b7283d')
                 remind_button.click()
+            except NoSuchElementException:
+                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'pendo-close-guide-7176fce7')))
+                newsort_button = driver.find_element(By.ID, value='pendo-close-guide-7176fce7')
+                newsort_button.click()
             time.sleep(random.randint(1, 10))
 
         # If timeout, then save the items that needed to be jumped and continue with the next paper
