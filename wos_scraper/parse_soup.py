@@ -16,7 +16,7 @@ def get_text_or_NA(item):
 
 def parse_html_get_table(htmlfile):
     """
-    Parse html, get paper information (author, title, year, abstract), and saves as .csv
+    Parse html, getting paper information (author, title, year, abstract)
     :param htmlfile: str, path to the html file to be parsed
     :return: DataFrame object, dataframe table with tabularized parsed information
     """
@@ -25,7 +25,7 @@ def parse_html_get_table(htmlfile):
     abs_list = []
     title_list = []
     auths_list = []
-    year_list = []
+    pub_date_list = []
     journal_list = []
     cit_list = []
     for paper in papers:
@@ -33,7 +33,7 @@ def parse_html_get_table(htmlfile):
         title = paper.find('a', class_='title title-link font-size-18 ng-star-inserted')
         abstract = paper.find('div', class_='abstract show-more-btn ng-star-inserted expanded')
         author = paper.find('a', class_='mat-tooltip-trigger authors ng-star-inserted')
-        year = paper.find('span', class_='value ng-star-inserted')
+        pub_date = paper.find('span', class_='value ng-star-inserted')
         journal = paper.find('a', class_='mat-focus-indicator mat-tooltip-trigger font-size-14 '
                                          'summary-source-title-link remove-space no-left-padding '
                                          'mat-button mat-button-base mat-primary ng-star-inserted')
@@ -43,7 +43,7 @@ def parse_html_get_table(htmlfile):
         text_abstract = get_text_or_NA(abstract)
         text_title = get_text_or_NA(title)
         text_author = get_text_or_NA(author)
-        text_year = get_text_or_NA(year)
+        text_pub_date = get_text_or_NA(pub_date).split('|')[0]
         text_journal = get_text_or_NA(journal)
         text_citations = get_text_or_NA(citations)
 
@@ -51,13 +51,13 @@ def parse_html_get_table(htmlfile):
         abs_list.append(text_abstract)
         title_list.append(text_title)
         auths_list.append(text_author)
-        year_list.append(text_year)
+        pub_date_list.append(text_pub_date)
         journal_list.append(text_journal)
         cit_list.append(text_citations)
 
         # Create and fill df
-        df = pd.DataFrame({'Author': auths_list,
-                           'Year': year_list,
+        df = pd.DataFrame({'First author': auths_list,
+                           'Year': pub_date_list,
                            'Title': title_list,
                            'Journal': journal_list,
                            'Abstract': abs_list})
