@@ -22,6 +22,7 @@ To run this tool, you'll need to setup a Python environment and install the nece
 - The codes will prompt first a firefox window and then it will keep opening new windows, each for a certain pagination stemming from the web search. You can close them all manually (except for the last-opened window, which is being dynamically scraped) or supress their opening with function arguments of the function `scroll_and_click_showmore` of the module `setup_page`.
 
 ## Usage
+--------
 Currently, this tool is not yet packaged (no pip install). Thus, to call the modules, you can easily use the `\example\` folder and use it as template for your project. Go to `main.py`and adapt the code as following:
 
    ```python
