@@ -56,3 +56,8 @@ This is currently a limitation of the tool and is under investigation. The code 
 
 ### "Why is it so slow?"
 Web scraping is an elegant way to extract publicly available that otherwise would need to be done manually and take an eternity. However, any scraping method needs to have sleep times throughout the code (the well-known `time.sleep()`) in order to safely interact with the host's server. If multiple requests are sent simultaneously, the host's server can be compromised and the scraping might damage its functioning. Thus, don’t find it strange that the scraping is taking hours, this is how it should happen.
+
+
+## Submit an issue!
+-------------------
+Please submit your issues, possible improvements, and bugs by openning an [issue](https://github.com/beatriznegreiros/web-scraping-wos/issues). Answers should not take more than a day.
