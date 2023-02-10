@@ -71,11 +71,13 @@ def scroll_and_click_showmore(indexes_to_loop, driver):
 
             # If this exception is raised, it means a pop-up opened that we need to get rid off
             except ElementClickInterceptedException:
-                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'pendo-button-f8b7283d')))
+                WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.ID, 'pendo-button-f8b7283d')))
                 remind_button = driver.find_element(By.ID, value='pendo-button-f8b7283d')
                 remind_button.click()
             except NoSuchElementException:
-                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.ID, 'pendo-close-guide-7176fce7')))
+                WebDriverWait(driver, 10).until(
+                    EC.element_to_be_clickable((By.ID, 'pendo-close-guide-7176fce7')))
                 newsort_button = driver.find_element(By.ID, value='pendo-close-guide-7176fce7')
                 newsort_button.click()
             time.sleep(random.randint(1, 10))
@@ -94,12 +96,13 @@ def scroll_and_click_showmore(indexes_to_loop, driver):
     return is_not_clicked, driver
 
 
-def get_html_through_paginations(search, pags):
+def get_html_through_paginations(search, pags, supress=True):
     """
     Get and save html in the working directory, ready-to-be-parsed, of each web driver (pagination)
     :param search: str, link containing the search made on Web f Science
     :param pags: list, list of pages to iterate. If the code should iterate
     through the first 10 search result pages, then pags = range(1, 11)
+    :param supress: boolean, set true if web browsers should be closed after html extraction
     :return: list of html per pagination, list of filenames (.html) saved
     """
     list_html_per_pagination = []
@@ -115,5 +118,7 @@ def get_html_through_paginations(search, pags):
             f.write(html)
         list_html_per_pagination.append(html)
         file_list.append(filename)
+        if supress:
+            page_driver.close()
     return list_html_per_pagination, file_list
 
