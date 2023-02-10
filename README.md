@@ -21,6 +21,27 @@ To run this tool, you'll need to setup a Python environment and install the nece
 - For setting up your search on Web of Science, follow the example provided in the `/example/` folder
 - The codes will prompt first a firefox window and then it will keep opening new windows, each for a certain pagination stemming from the web search. You can close them all manually (except for the last-opened window, which is being dynamically scraped) or supress their opening with function arguments of the function `scroll_and_click_showmore` of the module `setup_page`.
 
+## Usage
+Currently, this tool is not yet packaged (no pip install). Thus, to call the modules, you can easily use the `\example\` folder and use it as template for your project. Go to `main.py`and adapt the code as following:
+
+   ```python
+   from wos_scraper import setup_page
+   from wos_scraper import parse_soup
+   
+   # Grovide the link to the search, for instance:
+   search = 'https://www.webofscience.com/wos/woscc/summary/ff7d7f65-1ac6-4213-b788-f3caf673d7fd-6c336e02/relevance/1'
+
+   # Get and save htmls of each pagination from 1 to 49:
+   html_list, html_save_files = setup_page.get_html_through_paginations(search, range(1, 50))  # This code line will save the html files corresponding to each page (from 1 to 49 in this case) in the same folder.
+   
+   # Parse htmls and produce tables with author, title, abstracts, etc
+   # Here, the html files will be parsed and tables for each html will be saved in the current folder.
+   for f in html_save_files:
+        htmlfile = open(f, 'r', encoding='utf-8').read()
+        df = parse_soup.parse_html_get_table(htmlfile)
+        df.to_csv('df-{}.csv'.format(f))
+   ```
+
 
 ## Troubleshooting
 -------------------
