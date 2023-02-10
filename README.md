@@ -22,7 +22,7 @@ To run this tool, you'll need to setup a Python environment and install the nece
 - The codes will prompt first a firefox window and then it will keep opening new windows, each for a certain pagination stemming from the web search. You can close them all manually (except for the last-opened window, which is being dynamically scraped) or supress their opening with function arguments of the function `scroll_and_click_showmore` of the module `setup_page`.
 
 
-## Debugging
+## Troubleshooting
 -------------------
 ### "The code won't start"
 Try re-running the code two or tree times. This is because the first cookie prompted by Web of Science may take some time to show up depending on your internet speed.
