@@ -5,7 +5,7 @@ A Python tool to perform systematic literature reviews from searching on Web of 
 
 ## Getting started
 -----------------------
-### Setting up environment
+### Setting up the Python environment
 To run this tool, you'll need to setup a Python environment and install the necessary packages. You can do so by following these steps:
 - Make sure you have [Firefox](https://www.mozilla.org/en-US/firefox/new/) installed
 - Clone this repository 
