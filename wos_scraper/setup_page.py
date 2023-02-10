@@ -2,6 +2,11 @@ from .config import *
 
 
 def setup_wos_driver(link):
+    """
+    Preparation of the web browser (driver) preceding the dynamic enabling of paper abstracts
+    :param link: str, link containing the search made on Web f Science
+    :return: WebDriver object, web browser opened on the web search made
+    """
     # Open a firefox window
     driver = webdriver.Firefox()
     # driver.maximize_window()
@@ -30,6 +35,15 @@ def setup_wos_driver(link):
 
 # Find all "Show more" buttons to open full-text abstracts
 def scroll_and_click_showmore(indexes_to_loop, driver):
+    """
+    Scrolls through papers of the specific page and clicks on "show more" button,
+    which opens the paper's full-text abstracts
+    :param indexes_to_loop: list of paper-indexes to loop, e.g., Web of Science prompts 50 papers per page.
+    :param driver: WebDriver object, browser opened on specific page
+    :return: paper indexes (list) where abstract "show more" button was
+    blocked and couldn't be clicked, WebDriver object (updated and ready to be parsed)
+    with all "show more buttons" clicked
+    """
     # Init list with items that couldnt be opened due to sophisticated web blocking
     is_not_clicked = []
 
@@ -81,6 +95,13 @@ def scroll_and_click_showmore(indexes_to_loop, driver):
 
 
 def get_html_through_paginations(search, pags):
+    """
+    Get and save html in the working directory, ready-to-be-parsed, of each web driver (pagination)
+    :param search: str, link containing the search made on Web f Science
+    :param pags: list, list of pages to iterate. If the code should iterate
+    through the first 10 search result pages, then pags = range(1, 11)
+    :return: list of html per pagination, list of filenames (.html) saved
+    """
     list_html_per_pagination = []
     file_list = []
     for i in pags:
@@ -96,15 +117,3 @@ def get_html_through_paginations(search, pags):
         file_list.append(filename)
     return list_html_per_pagination, file_list
 
-
-def save_htmls(list_of_htmls):
-    i = 1
-    file_list = []
-    for h in list_of_htmls:
-        filename = 'html_source_page_{}.html'.format(i)
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(h)
-        time.sleep(30)
-        i += 1
-        file_list.append(filename)
-    return file_list

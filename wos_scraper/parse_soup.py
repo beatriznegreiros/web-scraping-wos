@@ -2,6 +2,11 @@ from .config import *
 
 
 def get_text_or_NA(item):
+    """
+    Get and assign the text (string) of the html element or nan in case it is a nan object
+    :param item: AnyResult object (beautifulsoup), item resulting from .find() function
+    :return: string, string of the argument item
+    """
     try:
         result = item.text
     except AttributeError:
@@ -10,6 +15,11 @@ def get_text_or_NA(item):
 
 
 def parse_html_get_table(htmlfile):
+    """
+    Parse html, get paper information (author, title, year, abstract), and saves as .csv
+    :param htmlfile: str, path to the html file to be parsed
+    :return: DataFrame object, dataframe table with tabularized parsed information
+    """
     soup = BeautifulSoup(htmlfile, 'html.parser')
     papers = soup.find_all('div', {'class': 'data-section'})
     abs_list = []
@@ -33,6 +43,7 @@ def parse_html_get_table(htmlfile):
 
         # Create and fill df
         df = pd.DataFrame({'Title': title_list, 'Author': auths_list, 'Abstract': abs_list})
-    return df
+        return df
+
 
 
