@@ -31,8 +31,10 @@ Currently, this tool is not yet packaged (no pip install). Thus, to call the mod
    # Grovide the link to the search, for instance:
    search = 'https://www.webofscience.com/wos/woscc/summary/ff7d7f65-1ac6-4213-b788-f3caf673d7fd-6c336e02/relevance/1'
 
-   # Get and save htmls of each pagination from 1 to 49:
-   html_list, html_save_files = setup_page.get_html_through_paginations(search, range(1, 50))  # This code line will save the html files corresponding to each page (from 1 to 49 in this case) in the same folder.
+   # Get and save htmls of each pagination from 1 to 49.
+   # This code line will save the html files corresponding to each page 
+   # (from 1 to 49 in this case) in the same folder.
+   html_list, html_save_files = setup_page.get_html_through_paginations(search, range(1, 50))  
    
    # Parse htmls and produce tables with author, title, abstracts, etc
    # Here, the html files will be parsed and tables for each html will be saved in the current folder.
