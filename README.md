@@ -22,3 +22,10 @@ To run this tools, you'll need to setup a Python environment and install the nec
 - The codes will prompt first a firefox window and then it will keep opening new windows, each for a certain pagination stemming from the web search. You can close them all manually (except for the last-opened window, which is being dynamically scraped) or supress their opening with function arguments of the function `scroll_and_click_showmore` of the module `setup_page`.
 
 
+## Debugging
+-------------------
+### "The code won't start"
+Try re-runnning the code two or tree times. This is due to the fact that the first cookie prompted by Web of Science may take some time to show up depending on your internet speed.
+
+### "Some abstracts are missing"
+This is currently a limitation of the tool and is being investigated. The code automatically scrolls and clicks on the button "Show More", which allows for opening the abstract and thus subsequent parsing of the html. However, the WoS server often notices this systematic behavior and blocks the automated clicking.
