@@ -1,5 +1,5 @@
 # web-scraping-wos
-====================
+----------------------
 
 A program to scrape papers from Web of Science, get useful information (title, author, citations, abstract, journal) and store it in tables (.csv).
 
@@ -7,9 +7,11 @@ A program to scrape papers from Web of Science, get useful information (title, a
 -----------------------
 ### Setting up environment
 To run this tools, you'll need to setup a Python environment and install the necessary packages. You can do so by following these steps:
+- Make sure you have [Firefox](https://www.mozilla.org/en-US/firefox/new/) installed
 - Clone this repository 
-- Open the anaconda prompt and cd into this repository
-- Create: ``conda create --name <env_name> --file requirements.txt``
+- Open the [Anaconda](https://docs.anaconda.com/anaconda/install/index.html) prompt and create a new environment with ``conda create -n <env_name> python=3.9`` oruse virtualenv (for Linux machines) with ``python3 -m venv /path/to/new/virtual/environment``
+- cd (change directory) into this repository and install the necessary packages (in the `requirements.txt`):
+``pip install -r requirements.txt``
 
 ### Running the code
 - Once your environment is ready, you can either:
