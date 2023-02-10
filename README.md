@@ -1,15 +1,15 @@
 # web-scraping-wos
 ----------------------
 
-A Python tool to perform systematic literature reviews from searching on Web of Science (WoS), get useful information (title, author, year, citations, abstract, journal) and save it in tables (.csv). These codes thus enable dynamic web scraping of WoS, leveraged by `selenium` and statically parsed by `beautifulsoup4`.
+A Python tool to perform systematic literature reviews from searching on Web of Science (WoS), get useful information (title, author, year, citations, abstract, and journal) and save it in tables (.csv). These codes thus enable dynamic web scraping of WoS, leveraged by `selenium` and statically parsed by `beautifulsoup4`.
 
 ## Getting started
 -----------------------
 ### Setting up environment
-To run this tools, you'll need to setup a Python environment and install the necessary packages. You can do so by following these steps:
+To run this tool, you'll need to setup a Python environment and install the necessary packages. You can do so by following these steps:
 - Make sure you have [Firefox](https://www.mozilla.org/en-US/firefox/new/) installed
 - Clone this repository 
-- Open the [Anaconda](https://docs.anaconda.com/anaconda/install/index.html) prompt and create a new environment with ``conda create -n <env_name> python=3.9`` oruse virtualenv (for Linux machines) with ``python3 -m venv /path/to/new/virtual/environment``
+- Open the [Anaconda](https://docs.anaconda.com/anaconda/install/index.html) prompt and create a new environment with ``conda create -n <env_name> python=3.9`` or use virtualenv (for Linux machines) with ``python3 -m venv /path/to/new/virtual/environment``
 - cd (change directory) into this repository and install the necessary packages (in the `requirements.txt`):
 ``pip install -r requirements.txt``
 
@@ -25,7 +25,10 @@ To run this tools, you'll need to setup a Python environment and install the nec
 ## Debugging
 -------------------
 ### "The code won't start"
-Try re-runnning the code two or tree times. This is due to the fact that the first cookie prompted by Web of Science may take some time to show up depending on your internet speed.
+Try re-running the code two or tree times. This is because the first cookie prompted by Web of Science may take some time to show up depending on your internet speed.
 
 ### "Some abstracts are missing"
-This is currently a limitation of the tool and is being investigated. The code automatically scrolls and clicks on the button "Show More", which allows for opening the abstract and thus subsequent parsing of the html. However, the WoS server often notices this systematic behavior and blocks the automated clicking.
+This is currently a limitation of the tool and is under investigation. The code automatically scrolls and clicks on the button "Show More", which allows for opening the abstract and thus subsequent parsing of the html. However, the WoS server often notices this systematic behavior and blocks the automated clicking.
+
+### "Why is it so slow?"
+Web scraping needs is a beautiful way to extract publicly available that otherwise would need to be done manually and take an eternity. However, any scraping method needs to have sleep times throughout the code (the well-known `time.sleep()`) in order to safely interact with the host's server. If multiple requests are sent simultaneously, the host's server can be compromised and the scraping might damage its functioning. Thus, don’t find it strange that the scraping is taking hours, this is how it should happen.
