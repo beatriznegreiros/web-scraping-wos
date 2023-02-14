@@ -54,8 +54,11 @@ Try re-running the code two or tree times. This is because the first cookie prom
 ### "Some abstracts are missing"
 This is currently a limitation of the tool and is under investigation. The code automatically scrolls and clicks on the button "Show More", which allows for opening the abstract and thus subsequent parsing of the html. However, the WoS server often notices this systematic behavior and blocks the automated clicking.
 
-### "Why is it so slow?"
+### "Why is it taking so long?"
 Web scraping is an elegant way to extract publicly available that otherwise would need to be done manually and take an eternity. However, any scraping method needs to have sleep times throughout the code (the well-known `time.sleep()`) in order to safely interact with the host's server. If multiple requests are sent simultaneously, the host's server can be compromised and the scraping might damage its functioning. Thus, don’t find it strange that the scraping is taking hours, this is how it should happen.
+
+### "Stopped scraping at pagination p"
+If you were running the code to loop through n pages (``range(1, n+1)``) and the program is terminated at certain page p, simply restart the function ``setup_page.get_html_through_paginations()`` setting the arg ``pags`` to ``range(p, n+1)``. That will continue the web scraping and then you can parse the htmls with ``parse_soup.parse_html_get_table()``.
 
 
 ## Submit an issue!
