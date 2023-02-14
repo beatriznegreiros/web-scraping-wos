@@ -48,7 +48,7 @@ Currently, this tool is not yet packaged (no pip install). Thus, to call the mod
 
 ## Troubleshooting
 -------------------
-### "The code won't start"
+### "All environment settings are right, but the code won't start"
 Try re-running the code two or tree times. This is because the first cookie prompted by Web of Science may take some time to show up depending on your internet speed.
 
 ### "Some abstracts are missing"
