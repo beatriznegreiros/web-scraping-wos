@@ -28,6 +28,9 @@ def parse_html_get_table(htmlfile):
     pub_date_list = []
     journal_list = []
     cit_list = []
+    links_wos_list = []
+    links_full_text_list = []
+
     for paper in papers:
         # Search html elements within paper Div
         title = paper.find('a', class_='title title-link font-size-18 ng-star-inserted')
@@ -38,6 +41,9 @@ def parse_html_get_table(htmlfile):
                                          'summary-source-title-link remove-space no-left-padding '
                                          'mat-button mat-button-base mat-primary ng-star-inserted')
         citations = paper.find('a', class_='stat-number font-size-24 link link-color ng-star-inserted')
+        link_wos = paper.find('a', class_='title title-link font-size-18 ng-star-inserted')
+        link_full_text = paper.find('a', class_='mat-tooltip-trigger font-size-14 disableContext image '
+                                                'margin-right-10--reversible ng-star-inserted')
 
         # Assign text values or give nan
         text_abstract = get_text_or_NA(abstract)
@@ -55,12 +61,18 @@ def parse_html_get_table(htmlfile):
         journal_list.append(text_journal)
         cit_list.append(text_citations)
 
+        # Append the links
+        links_wos_list.append('https://www.webofscience.com' + link_wos['href'] if link_wos['href'] else '')
+        links_full_text_list.append(link_full_text['href'] if link_full_text['href'] else '')
+
         # Create and fill df
         df = pd.DataFrame({'First author': auths_list,
                            'Year': pub_date_list,
                            'Title': title_list,
                            'Journal': journal_list,
-                           'Abstract': abs_list})
+                           'Abstract': abs_list,
+                           'wos_link': links_wos_list,
+                            'fulltext_link': links_full_text_list})
     return df
 
 
