@@ -58,7 +58,7 @@ Currently, this tool is not yet packaged (no pip install). Thus, to call the mod
         df = parse_soup.parse_html_get_table(htmlfile)
         df.to_csv('df-{}.csv'.format(f))
    
-   # Get further specific details of the papers from their WoS links:
+   # Get further specific details of the papers (DOI, keywords, plus-keywords, research areas, corresponding address) from their WoS links:
    for i in range(1, 49):
     f = 'df-{}.csv'.format(i)
     df = pd.read_csv(f)
