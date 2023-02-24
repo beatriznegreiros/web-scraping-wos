@@ -43,7 +43,7 @@ Currently, this tool is not yet packaged (no pip install). Thus, to call the mod
    from wos_scraper import setup_page
    from wos_scraper import parse_soup
    
-   # Grovide the link to the search, for instance:
+   # Provide the link to the search, for instance:
    search = 'https://www.webofscience.com/wos/woscc/summary/ff7d7f65-1ac6-4213-b788-f3caf673d7fd-6c336e02/relevance/1'
 
    # Get and save htmls of each pagination from 1 to 49.
@@ -57,6 +57,14 @@ Currently, this tool is not yet packaged (no pip install). Thus, to call the mod
         htmlfile = open(f, 'r', encoding='utf-8').read()
         df = parse_soup.parse_html_get_table(htmlfile)
         df.to_csv('df-{}.csv'.format(f))
+   
+   # Get further specific details of the papers from their WoS links:
+   for i in range(1, 49):
+    f = 'df-{}.csv'.format(i)
+    df = pd.read_csv(f)
+    df_new = parse_papers.parse_papers_from_urls(df, column='wos_link')
+    df_new.to_csv('df-appended-{}.csv'.format(i))
+
    ```
 
 
