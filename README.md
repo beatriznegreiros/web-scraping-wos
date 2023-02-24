@@ -1,7 +1,21 @@
 # web-scraping-wos
 ----------------------
 
-A Python tool to perform systematic literature reviews from searching on Web of Science (WoS), get useful information (title, author, year, citations, abstract, and journal) and save it in tables (.csv). These codes thus enable dynamic web scraping of WoS, leveraged by `selenium` and statically parsed by `beautifulsoup4`.
+A Python tool to perform systematic literature reviews from searching on Web of Science (WoS), get useful information (see list below) and save it in tables (.csv). These codes thus enable dynamic web scraping of WoS, leveraged by `selenium` and statically parsed by `beautifulsoup4`.
+
+## Capabilities
+-----------------------
+This tool extracts the following data:
+- First Author
+- Date of publication (month and year)
+- Journal
+- Abstract
+- Link on WoS
+- Link to full text
+- DOI
+- Keywords and Plus-keywords
+- Corresponding address
+
 
 ## Getting started
 -----------------------
