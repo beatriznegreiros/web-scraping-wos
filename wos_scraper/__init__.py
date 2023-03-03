@@ -1,1 +1,1 @@
-__all__ = ['setup_page', 'parse_soup']
+__all__ = ['setup_page', 'parse_soup', 'parse_papers']

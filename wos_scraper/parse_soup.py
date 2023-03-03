@@ -36,7 +36,7 @@ def parse_html_get_table(htmlfile):
         title = paper.find('a', class_='title title-link font-size-18 ng-star-inserted')
         abstract = paper.find('div', class_='abstract show-more-btn ng-star-inserted expanded')
         author = paper.find('a', class_='mat-tooltip-trigger authors ng-star-inserted')
-        pub_date = paper.find('span', class_='value ng-star-inserted')
+        pub_date = paper.find('span', class_='value ng-star-inserted', attrs={'data-ta': True})
         journal = paper.find('a', class_='mat-focus-indicator mat-tooltip-trigger font-size-14 '
                                          'summary-source-title-link remove-space no-left-padding '
                                          'mat-button mat-button-base mat-primary ng-star-inserted')
