@@ -23,7 +23,7 @@ This tool extracts the following data:
 To run this tool, you'll need to setup a Python environment and install the necessary packages. You can do so by following these steps:
 - Make sure you have [Firefox](https://www.mozilla.org/en-US/firefox/new/) installed
 - Clone this repository 
-- Open the [Anaconda](https://docs.anaconda.com/anaconda/install/index.html) prompt and create a new environment with ``conda create -n <env_name> python=3.9`` or use virtualenv (for Linux machines) with ``python3 -m venv /path/to/new/virtual/environment``
+- Open the [Anaconda](https://docs.anaconda.com/anaconda/install/index.html) prompt and create a new environment with ``conda create --name <env_name> python=3.9`` or use virtualenv (for Linux machines) with ``python3 -m venv /path/to/new/virtual/environment``
 - cd (change directory) into this repository and install the necessary packages (in the `requirements.txt`):
 ``pip install -r requirements.txt``
 
