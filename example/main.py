@@ -17,7 +17,7 @@ import pandas as pd
 #     df.to_csv('./connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic-peerreview/df-{}.csv'.format(i))
 
 
-for i in range(1, 41):
+for i in range(26, 41):
     f = './connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic-peerreview/df-{}.csv'.format(i)
     df = pd.read_csv(f)
     df_new = parse_papers.parse_papers_from_urls(df, column='wos_link')
