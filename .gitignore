@@ -6,6 +6,8 @@ __pycache__/
 
 # Added
 example/outputs/
+example/connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic/
+example/connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic-peerreview/
 old/
 
 # C extensions
