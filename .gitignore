@@ -5,10 +5,10 @@ __pycache__/
 .idea
 
 # Added
-example/outputs/
-example/connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic/
-example/connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic-peerreview/
-old/
+example/outputs/*
+example/connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic/*
+example/connectivity-OR-exchange-OR-coupling-AND-river-OR-stream-OR-hyporheic-peerreview/*
+old/*
 
 # C extensions
 *.so
